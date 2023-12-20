@@ -1,0 +1,6 @@
+# IDE
+.idea
+
+tokenizer_*.json
+weigths
+runs
