@@ -148,7 +148,7 @@ def get_ds(config):
         train_ds, batch_size=config['batch_size'], shuffle=True
     )
     val_dataloader = DataLoader(
-        val_ds, batch_size=1, shuffle=False
+        val_ds, batch_size=1, shuffle=True
     )
 
     return train_dataloader, val_dataloader, tokenizer_src, tokenizer_tgt
