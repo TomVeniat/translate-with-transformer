@@ -18,8 +18,13 @@ def get_config():
     )
 
 
-def get_weights_file_path(config, epoch):
+def get_weights_file_path(config, epoch, create=True):
     model_folder = config['model_folder']
     model_basename = config['model_basename']
+    src_lang = config['lang_src']
+    tgt_lang = config['lang_tgt']
     model_filename = f'f{model_basename}{epoch}.pt'
-    return str(Path('.') / model_folder / model_filename)
+    path = Path('.') / model_folder / f'{src_lang}_{tgt_lang}' / model_filename
+    if create:
+        path.parent.mkdir(parents=True, exist_ok=True)
+    return str(path)

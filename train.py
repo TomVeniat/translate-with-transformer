@@ -168,7 +168,6 @@ def get_model(config, vocab_src_len, vocab_tgt_len):
 def train_model(config):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f'Using device {device}')
-    Path(config['model_folder']).mkdir(parents=True, exist_ok=True)
     train_loader, val_loader, tokenizer_src, tokenizer_tgt = get_ds(config)
     model = get_model(config, tokenizer_src.get_vocab_size(), tokenizer_tgt.get_vocab_size()).to(device)
 
@@ -238,6 +237,5 @@ def train_model(config):
 
 
 if __name__ == '__main__':
-    # warnings.filterwarnings('ignore')
     config = get_config()
     train_model(config)
