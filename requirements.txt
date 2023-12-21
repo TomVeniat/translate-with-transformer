@@ -2,3 +2,5 @@
 datasets==2.15.0
 tokenizers==0.13.3
 tensorboard
+tqdm
+altair
