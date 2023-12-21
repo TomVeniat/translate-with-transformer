@@ -2,5 +2,5 @@
 .idea
 
 tokenizer_*.json
-weigths
+weights
 runs
