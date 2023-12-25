@@ -103,6 +103,8 @@ class MultiHeadAttention(nn.Module):
         self.w_o = nn.Linear(d_att, d_model)
         self.dropout = nn.Dropout(dropout)
 
+        self.attention_scores = None
+
     def forward(self, q, k, v, mask=None):
         x_q = self.w_q(q)  # (batch, seq len, d_att)
         x_k = self.w_k(k)
@@ -114,7 +116,7 @@ class MultiHeadAttention(nn.Module):
 
         attention_res = [attention(q, k, v, mask, self.dropout) for q, k, v in zip(xq_split, xk_split, xv_split)]
         heads, attention_scores = list(zip(*attention_res))
-
+        self.attention_scores = torch.stack(attention_scores, dim=1)
         res = torch.cat(heads, -1)
         # print(res.shape)
         return self.w_o(res)
